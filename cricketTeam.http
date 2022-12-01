@@ -9,3 +9,22 @@ POST  http://localhost:3000/players/
   "jerseyNumber": 17,
   "role": "Bowler"
 }
+
+###
+
+GET  http://localhost:3000/players/7
+
+###
+PUT  http://localhost:3000/players/2
+
+
+{
+  "playerName": "Maneesh",
+  "jerseyNumber": 54,
+  "role": "All-rounder"
+}
+
+###
+
+DELETE http://localhost:3000/players/1
+
