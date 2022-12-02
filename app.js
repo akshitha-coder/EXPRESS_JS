@@ -37,8 +37,22 @@ app.get("/players/", async (request, response) => {
     FROM cricket_team
     ORDER BY player_id;
     `;
-  const playersArray = await db.all(getPlayersQuery);
-  response.send(playersArray); //sending response
+  const dbObject = await db.all(getPlayersQuery);
+
+  const convertDbObjectToResponseObject = (dbObject) => {
+    return {
+      playerId: dbObject.player_id,
+      playerName: dbObject.player_name,
+      jerseyNumber: dbObject.jersey_number,
+      role: dbObject.role,
+    };
+  };
+  const arr = [];
+  for (let each of dbObject) {
+    const a = convertDbObjectToResponseObject(each);
+    arr.push(a);
+  }
+  response.send(arr);
 });
 
 //Add a Player
@@ -70,7 +84,19 @@ app.get("/players/:playerId/", async (request, response) => {
     `;
 
   const playerDetails = await db.get(playerQuery);
-  response.send(playerDetails);
+
+  const convertDbObjectToResponseObject = (dbObject) => {
+    return {
+      playerId: dbObject.player_id,
+      playerName: dbObject.player_name,
+      jerseyNumber: dbObject.jersey_number,
+      role: dbObject.role,
+    };
+  };
+
+  const ans = convertDbObjectToResponseObject(playerDetails);
+
+  response.send(ans);
 });
 
 //Update a Player
@@ -89,7 +115,7 @@ app.put("/players/:playerId", async (request, response) => {
     `;
 
   const dbResponse = await db.run(playerQuery);
-  response.send("Player details Updated");
+  response.send("Player Details Updated");
 });
 
 //Delete a player

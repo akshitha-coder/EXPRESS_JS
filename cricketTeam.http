@@ -3,6 +3,7 @@ GET http://localhost:3000/players/
 ###
 
 POST  http://localhost:3000/players/
+Content-Type: application/json
 
 {
   "playerName": "Vishal",
@@ -16,6 +17,7 @@ GET  http://localhost:3000/players/7
 
 ###
 PUT  http://localhost:3000/players/2
+Content-Type: application/json
 
 
 {
